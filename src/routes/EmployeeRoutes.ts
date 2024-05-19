@@ -2,7 +2,7 @@ import { getAuthHeaders } from "../utils/headers";
 
 const baseURL = process.env.REACT_APP_BASE_URL + 'employee';
 
-const CustomerRoutes = ($api: any) => ({
+const EmployeeRoutes = ($api: any) => ({
     index: (filters: any) => $api.get(`${baseURL}`, {
         params: filters,
         headers: getAuthHeaders(),
@@ -21,4 +21,4 @@ const CustomerRoutes = ($api: any) => ({
     }),
 });
 
-export default CustomerRoutes;
+export default EmployeeRoutes;

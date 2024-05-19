@@ -14,13 +14,11 @@ const Login: React.FC = () => {
     const handleLogin = async () => {
         const email = (document.getElementById('email') as HTMLInputElement).value;
         const password = (document.getElementById('password') as HTMLInputElement).value;
-        const subdomain = getAppURL();
 
         try {
-            const response = await AuthRoutes(api).login({ email, password, subdomain });
+            const response = await AuthRoutes(api).login({ email, password });
 
             localStorage.setItem('token', response.data.token);
-            localStorage.setItem('tenant', response.data.tenant);
 
             navigate('/');
         } catch (error) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import CustomerRoutes from "../../routes/EmployeeRoutes";
+import EmployeeRoutes from "../../routes/EmployeeRoutes";
 import AppLayout from "../../layouts/AppLayout";
 
 interface CustomerData {
@@ -18,7 +18,7 @@ const Employee: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await CustomerRoutes(api).list();
+        const response = await EmployeeRoutes(api).list();
         setCustomerData(response.data);
       } catch (error) {
         console.error(error);
