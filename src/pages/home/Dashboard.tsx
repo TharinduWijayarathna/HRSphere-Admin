@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import AppLayout from '../../layouts/AppLayout';
 import { useNavigate } from 'react-router-dom';
 
-const Home: React.FC = () => {
+const Dashboard: React.FC = () => {
 
   const navigate = useNavigate();
 
@@ -19,4 +19,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

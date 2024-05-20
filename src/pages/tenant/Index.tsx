@@ -12,7 +12,7 @@ interface CustomerData {
 // Create the api instance outside the component
 const api = axios.create();
 
-const Employee: React.FC = () => {
+const TenantIndex: React.FC = () => {
   const [customerData, setCustomerData] = useState<CustomerData | null>(null);
 
   useEffect(() => {
@@ -73,4 +73,4 @@ const Employee: React.FC = () => {
   );
 };
 
-export default Employee;
+export default TenantIndex;
