@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import AppLayout from '../../layouts/AppLayout';
 import { useNavigate } from 'react-router-dom';
-import UserChart from '../../components/charts/UserChart';
-import DashboardCard from '../../components/charts/UserChart';
+import UserChartCard from '../../components/charts/UserChart';
 
 const Dashboard: React.FC = () => {
 
@@ -16,7 +15,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <AppLayout>
-      <DashboardCard />
+      <UserChartCard />
     </AppLayout>
   );
 };

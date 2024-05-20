@@ -125,7 +125,7 @@ const UserChart: React.FC<{ range: string }> = ({ range }) => {
     return <div id="chart-active-users-2" ref={chartRef}></div>;
 };
 
-const DashboardCard: React.FC = () => {
+const UserChartCard: React.FC = () => {
     const [range, setRange] = useState("Last 7 days");
 
     return (
@@ -160,14 +160,14 @@ const DashboardCard: React.FC = () => {
                                 <div className="h2 text-start">&nbsp; {generateRandomData(1, 300)[0]}</div>
                             </div>
                             <div className="px-3">
-                                <div className="text-muted text-start">
-                                    <span className="status-dot bg-danger"></span> Deactivated Tenants
+                                <div className="text-muted  text-start">
+                                    <span className="status-dot bg-green"></span> Active Tenants
                                 </div>
                                 <div className="h2 text-start">&nbsp; {generateRandomData(1, 300)[0]}</div>
                             </div>
                             <div className="px-3">
-                                <div className="text-muted  text-start">
-                                    <span className="status-dot bg-green"></span> Active Tenants
+                                <div className="text-muted text-start">
+                                    <span className="status-dot bg-danger"></span> Deactivated Tenants
                                 </div>
                                 <div className="h2 text-start">&nbsp; {generateRandomData(1, 300)[0]}</div>
                             </div>
@@ -179,4 +179,4 @@ const DashboardCard: React.FC = () => {
     );
 };
 
-export default DashboardCard;
+export default UserChartCard;
