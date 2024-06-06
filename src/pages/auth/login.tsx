@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import AuthRoutes from '../../routes/AuthRoutes';
 import './login.css';
-import { getAppURL } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
