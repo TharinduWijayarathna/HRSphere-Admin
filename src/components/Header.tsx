@@ -1,7 +1,18 @@
+import { IconBell, IconMoon, IconSun } from "@tabler/icons-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+
+    const logout = () => {
+        localStorage.clear();
+        window.location.href = '/';
+    }
+
+    const user = localStorage.getItem('user');
+    const userName = user ? user.split(' ')[0] : '';
+    
+
     return (
         <>
             <header className="navbar navbar-expand-md d-print-none">
@@ -20,7 +31,7 @@ const Header = () => {
                     <h1 className="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                         <a href=".">
                             <img
-                                src="./assets/static/logo.svg"
+                                src="./assets/static/logo.png"
                                 width={110}
                                 height={32}
                                 alt="Tabler"
@@ -37,22 +48,7 @@ const Header = () => {
                                 data-bs-toggle="tooltip"
                                 data-bs-placement="bottom"
                             >
-                                {/* Download SVG icon from http://tabler-icons.io/i/moon */}
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="icon"
-                                    width={24}
-                                    height={24}
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={2}
-                                    stroke="currentColor"
-                                    fill="none"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
-                                </svg>
+                                <IconSun stroke={1.5} />
                             </a>
                             <a
                                 href="?theme=light"
@@ -61,44 +57,12 @@ const Header = () => {
                                 data-bs-toggle="tooltip"
                                 data-bs-placement="bottom"
                             >
-                                {/* Download SVG icon from http://tabler-icons.io/i/sun */}
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="icon"
-                                    width={24}
-                                    height={24}
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={2}
-                                    stroke="currentColor"
-                                    fill="none"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
-                                </svg>
+                                <IconMoon stroke={1.5} />
                             </a>
                             <div className="nav-item dropdown d-none d-md-flex me-3">
                                 <Link to="#" className="nav-link px-0" data-bs-toggle="dropdown">
-                                
-                                    {/* Download SVG icon from http://tabler-icons.io/i/bell */}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="icon"
-                                        width={24}
-                                        height={24}
-                                        viewBox="0 0 24 24"
-                                        strokeWidth={2}
-                                        stroke="currentColor"
-                                        fill="none"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    >
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-                                        <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-                                    </svg>
+
+                                    <IconBell stroke={1.5} />
                                     <span className="badge bg-red" />
                                 </Link>
                                 <div className="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
@@ -147,125 +111,6 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="list-group-item">
-                                                <div className="row align-items-center">
-                                                    <div className="col-auto">
-                                                        <span className="status-dot d-block" />
-                                                    </div>
-                                                    <div className="col text-truncate">
-                                                        <Link to="#" className="text-body d-block">
-                                                            Example 2
-                                                        </Link>
-                                                        <div className="d-block text-muted text-truncate mt-n1">
-                                                            justify-content:between ⇒
-                                                            justify-content:space-between (#29734)
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <Link to="#" className="list-group-item-actions">
-                                                        
-                                                            {/* Download SVG icon from http://tabler-icons.io/i/star */}
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                className="icon text-yellow"
-                                                                width={24}
-                                                                height={24}
-                                                                viewBox="0 0 24 24"
-                                                                strokeWidth={2}
-                                                                stroke="currentColor"
-                                                                fill="none"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                            >
-                                                                <path
-                                                                    stroke="none"
-                                                                    d="M0 0h24v24H0z"
-                                                                    fill="none"
-                                                                />
-                                                                <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-                                                            </svg>
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="list-group-item">
-                                                <div className="row align-items-center">
-                                                    <div className="col-auto">
-                                                        <span className="status-dot d-block" />
-                                                    </div>
-                                                    <div className="col text-truncate">
-                                                        <Link to="#" className="text-body d-block">
-                                                            Example 3
-                                                        </Link>
-                                                        <div className="d-block text-muted text-truncate mt-n1">
-                                                            Update change-version.js (#29736)
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <Link to="#" className="list-group-item-actions">
-                                                            {/* Download SVG icon from http://tabler-icons.io/i/star */}
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                className="icon text-muted"
-                                                                width={24}
-                                                                height={24}
-                                                                viewBox="0 0 24 24"
-                                                                strokeWidth={2}
-                                                                stroke="currentColor"
-                                                                fill="none"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                            >
-                                                                <path
-                                                                    stroke="none"
-                                                                    d="M0 0h24v24H0z"
-                                                                    fill="none"
-                                                                />
-                                                                <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-                                                            </svg>
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="list-group-item">
-                                                <div className="row align-items-center">
-                                                    <div className="col-auto">
-                                                        <span className="status-dot status-dot-animated bg-green d-block" />
-                                                    </div>
-                                                    <div className="col text-truncate">
-                                                        <Link to="#" className="text-body d-block">
-                                                            Example 4
-                                                        </Link>
-                                                        <div className="d-block text-muted text-truncate mt-n1">
-                                                            Regenerate package-lock.json (#29730)
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <Link to="#" className="list-group-item-actions">
-                                                            {/* Download SVG icon from http://tabler-icons.io/i/star */}
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                className="icon text-muted"
-                                                                width={24}
-                                                                height={24}
-                                                                viewBox="0 0 24 24"
-                                                                strokeWidth={2}
-                                                                stroke="currentColor"
-                                                                fill="none"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                            >
-                                                                <path
-                                                                    stroke="none"
-                                                                    d="M0 0h24v24H0z"
-                                                                    fill="none"
-                                                                />
-                                                                <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-                                                            </svg>
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -279,10 +124,12 @@ const Header = () => {
                                         backgroundImage: "url(./assets/static/avatars/000m.jpg)",
                                     }}
                                 />
-                                <div className="d-none d-xl-block ps-2">
-                                    <div>Tharindu Wijayarathna</div>
+                                <div className="d-none d-xl-block ps-2 text-start">
+                                    <div>
+                                        {userName}
+                                    </div>
                                     <div className="mt-1 small text-muted">
-                                        Senior Software Engineer
+                                        System User
                                     </div>
                                 </div>
                             </Link>
@@ -293,9 +140,9 @@ const Header = () => {
                                 <a href="./settings.html" className="dropdown-item">
                                     Settings
                                 </a>
-                                <a href="./sign-in.html" className="dropdown-item">
+                                <button onClick={logout} className="dropdown-item">
                                     Logout
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -16,9 +16,8 @@ const Login: React.FC = () => {
 
         try {
             const response = await AuthRoutes(api).login({ email, password });
-
             localStorage.setItem('token', response.data.token);
-
+            localStorage.setItem('user', response.data.user.name);
             navigate('/');
         } catch (error) {
             console.error(error);
@@ -42,7 +41,7 @@ const Login: React.FC = () => {
                 <div className="container container-tight py-4">
                     <div className="text-center mb-4">
                         <a href="." className="navbar-brand navbar-brand-autodark">
-                            <img src="./assets/static/logo.svg" height={36} alt="" />
+                            <img src="./assets/static/logo.png" height={36} alt="" />
                         </a>
                     </div>
                     <div className="card card-md">
