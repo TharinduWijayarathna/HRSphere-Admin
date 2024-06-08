@@ -4,11 +4,10 @@ import React from 'react';
 interface PageHeaderProps {
     pretitle: string;
     title: string;
-    buttonText: string;
-    modalName: string;
+    children?: React.ReactNode;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ pretitle, title, buttonText, modalName }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ pretitle, title, children }) => {
     const modalContent = (
         <div>
             <p>Here you can add details.</p>
@@ -26,16 +25,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ pretitle, title, buttonText, mo
                     </div>
                     <div className="col-auto ms-auto d-print-none">
                         <div className="btn-list">
-
-
-                            <button
-                                className="btn btn-primary"
-                                data-bs-toggle="modal"
-                                data-bs-target={`#${modalName}`}
-                            >
-                                <IconPlus size={18} strokeWidth={2} className="me-2" />
-                                {buttonText}
-                            </button>
+                           {children}
                         </div>
                     </div>
                 </div>

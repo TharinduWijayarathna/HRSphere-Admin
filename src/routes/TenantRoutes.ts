@@ -10,13 +10,13 @@ const TenantRoutes = ($api: any) => ({
     list: () => $api.get(`${baseURL}/list`, {
         headers: getAuthHeaders(),
     }),
-    delete: (id: number) => $api.delete(`${baseURL}/${id}`, {
+    delete: (id: number) => $api.delete(`${baseURL}/delete/${id}`, {
         headers: getAuthHeaders(),
     }),
-    update: (id: number, data: any) => $api.put(`${baseURL}/${id}`, data, {
+    update: (id: number, data: any) => $api.put(`${baseURL}/update/${id}`, data, {
         headers: getAuthHeaders(),
     }),
-    create: (data: any) => $api.post(`${baseURL}`, data, {
+    store: (data: any) => $api.post(`${baseURL}/store`, data, {
         headers: getAuthHeaders(),
     }),
 });

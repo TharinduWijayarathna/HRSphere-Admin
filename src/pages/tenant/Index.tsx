@@ -7,7 +7,6 @@ import axios from "axios";
 import _ from 'lodash';
 import "./index.css";
 import PageHeader from "../../components/PageHeader";
-import Modal from "../../components/Modal";
 
 const TenantIndex: React.FC = () => {
 
@@ -26,6 +25,24 @@ const TenantIndex: React.FC = () => {
       setPage(page);
       setSize(size);
       setTotal(response.data.total);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const AddTenants = async (e: any) => {
+    e.preventDefault();
+    const form = document.getElementById('tenant-form') as HTMLFormElement;
+    const data = new FormData(form);
+
+    try {
+      await TenantRoutes(api).store(data);
+      getTenants(1, 10, '');
+      form.reset();
+     
+      const close = document.getElementById('close-modal') as HTMLButtonElement;
+      close.click();
+    
     } catch (error) {
       console.error(error);
     }
@@ -59,7 +76,17 @@ const TenantIndex: React.FC = () => {
     <>
       <AppLayout>
 
-        <PageHeader pretitle="Tenant Management" title="Tenants" buttonText="Add tenants" modalName="addTenantModal" />
+        <PageHeader pretitle="Tenant Management" title="Tenants">
+          <button
+            className="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#tenant-modal"
+
+          >
+            <IconPlus size={18} strokeWidth={2} className="me-2" />
+            Add Tenants
+          </button>
+        </PageHeader>
 
         <div className="page-body">
           <div className="card">
@@ -133,9 +160,38 @@ const TenantIndex: React.FC = () => {
         </div>
       </AppLayout>
 
-      <Modal title="Add Tenant" id="addTenantModal" isOpen={false}>
-        {/* Add Tenant Form or Content */}
-      </Modal>
+      <div className="modal modal-blur fade" id="tenant-modal" tabIndex={-1} role="dialog" aria-hidden="true">
+        <div className="modal-dialog modal-md modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <form id="tenant-form" onSubmit={AddTenants}>
+              <div className="modal-header">
+                <h5 className="modal-title">Add Tenant</h5>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+              </div>
+              <div className="modal-body text-start">
+                <div className="mb-3">
+                  <label className="form-label">Tenant Name</label>
+                  <input type="text" className="form-control" name="name" placeholder="Enter tenant name" />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Domain Name</label>
+                  <input type="text" className="form-control" name="domain" placeholder="Enter domain name" />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Database Name</label>
+                  <input type="text" className="form-control" name="tenancy_db_name" placeholder="Enter database name" />
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn" data-bs-dismiss="modal">Close</button>
+                <button type="submit" className="btn btn-primary">Save changes</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
     </>
   );
 };
