@@ -109,7 +109,6 @@ const TenantIndex: React.FC = () => {
   useEffect(() => {
     getTenants(1, 10, '');
   }, []);
-
   return (
     <>
       <AppLayout>
@@ -150,6 +149,9 @@ const TenantIndex: React.FC = () => {
                   <tr>
                     <th className="w-1">Tenant Name</th>
                     <th>Domain Name</th>
+                    <th>Country</th>
+                    <th>Payment Status</th>
+                    <th>Status</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                   </tr>
@@ -160,6 +162,8 @@ const TenantIndex: React.FC = () => {
                       <td>{tenant.name}</td>
                       <td>{tenant.domain}</td>
                       <td>{tenant.country}</td>
+                      <td>{tenant.payment_status}</td>
+                      <td>{tenant.status}</td>
                       <td>{tenant.created_at}</td>
                       <td>{tenant.updated_at}</td>
                     </tr>
