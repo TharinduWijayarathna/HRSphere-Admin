@@ -10,21 +10,21 @@ import Select, { SingleValue } from 'react-select';
 import SignatureCanvas from 'react-signature-canvas';
 
 interface CountryOption {
-  value: string;
+  value: number;
   label: string;
 }
 
 const countries: CountryOption[] = [
-  { value: 'United States', label: 'United States' },
-  { value: 'Canada', label: 'Canada' },
-  { value: 'Mexico', label: 'Mexico' },
-  { value: 'United Kingdom', label: 'United Kingdom' },
-  { value: 'Australia', label: 'Australia' },
-  { value: 'Germany', label: 'Germany' },
-  { value: 'France', label: 'France' },
-  { value: 'Japan', label: 'Japan' },
-  { value: 'China', label: 'China' },
-  { value: 'India', label: 'India' }
+  { value: 1, label: 'United States' },
+  { value: 2, label: 'Canada' },
+  { value: 3, label: 'Mexico' },
+  { value: 4, label: 'United Kingdom' },
+  { value: 5, label: 'Australia' },
+  { value: 6, label: 'Germany' },
+  { value: 7, label: 'France' },
+  { value: 8, label: 'Japan' },
+  { value: 9, label: 'China' },
+  { value: 10, label: 'India' }
 ];
 
 const TenantIndex: React.FC = () => {
@@ -36,9 +36,9 @@ const TenantIndex: React.FC = () => {
   const [search, setSearch] = useState('');
   const sigCanvas = useRef<SignatureCanvas>(null);
 
-  const [selectedCountry, setSelectedCountry] = useState<SingleValue<CountryOption>>(null);
+  const [selectedCountry, setSelectedCountry] = useState<SingleValue<CountryOption> | null>(null);
 
-  const handleCountryChange = (option: SingleValue<CountryOption>) => {
+  const handleCountryChange = (option: SingleValue<CountryOption> | null) => {
     setSelectedCountry(option);
   };
 
@@ -159,6 +159,7 @@ const TenantIndex: React.FC = () => {
                     <tr key={tenant.id}>
                       <td>{tenant.name}</td>
                       <td>{tenant.domain}</td>
+                      <td>{tenant.country}</td>
                       <td>{tenant.created_at}</td>
                       <td>{tenant.updated_at}</td>
                     </tr>
