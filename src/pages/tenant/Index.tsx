@@ -1,12 +1,31 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import AppLayout from "../../layouts/AppLayout";
-import { IconChevronLeft, IconChevronRight, IconPlus } from "@tabler/icons-react";
-import { useNavigate } from "react-router-dom";
+import { IconCheck, IconChevronLeft, IconChevronRight, IconPlus, IconTrash } from "@tabler/icons-react";
 import TenantRoutes from "../../routes/TenantRoutes";
 import axios from "axios";
 import _ from 'lodash';
 import "./index.css";
 import PageHeader from "../../components/PageHeader";
+import Select, { SingleValue } from 'react-select';
+import SignatureCanvas from 'react-signature-canvas';
+
+interface CountryOption {
+  value: string;
+  label: string;
+}
+
+const countries: CountryOption[] = [
+  { value: 'United States', label: 'United States' },
+  { value: 'Canada', label: 'Canada' },
+  { value: 'Mexico', label: 'Mexico' },
+  { value: 'United Kingdom', label: 'United Kingdom' },
+  { value: 'Australia', label: 'Australia' },
+  { value: 'Germany', label: 'Germany' },
+  { value: 'France', label: 'France' },
+  { value: 'Japan', label: 'Japan' },
+  { value: 'China', label: 'China' },
+  { value: 'India', label: 'India' }
+];
 
 const TenantIndex: React.FC = () => {
 
@@ -15,6 +34,25 @@ const TenantIndex: React.FC = () => {
   const [size, setSize] = useState(10);
   const [total, setTotal] = useState(0);
   const [search, setSearch] = useState('');
+  const sigCanvas = useRef<SignatureCanvas>(null);
+
+  const [selectedCountry, setSelectedCountry] = useState<SingleValue<CountryOption>>(null);
+
+  const handleCountryChange = (option: SingleValue<CountryOption>) => {
+    setSelectedCountry(option);
+  };
+
+
+  const clearSignature = () => {
+    sigCanvas.current?.clear();
+  };
+
+  const saveSignature = () => {
+    if (sigCanvas.current) {
+      const dataURL = sigCanvas.current.getTrimmedCanvas().toDataURL('image/png');
+      console.log(dataURL); // Save or send this dataURL to the server
+    }
+  };
 
   const api = axios.create();
 
@@ -39,10 +77,10 @@ const TenantIndex: React.FC = () => {
       await TenantRoutes(api).store(data);
       getTenants(1, 10, '');
       form.reset();
-     
+
       const close = document.getElementById('close-modal') as HTMLButtonElement;
       close.click();
-    
+
     } catch (error) {
       console.error(error);
     }
@@ -112,7 +150,6 @@ const TenantIndex: React.FC = () => {
                   <tr>
                     <th className="w-1">Tenant Name</th>
                     <th>Domain Name</th>
-                    <th>Database Name</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                   </tr>
@@ -122,7 +159,6 @@ const TenantIndex: React.FC = () => {
                     <tr key={tenant.id}>
                       <td>{tenant.name}</td>
                       <td>{tenant.domain}</td>
-                      <td>{tenant.database}</td>
                       <td>{tenant.created_at}</td>
                       <td>{tenant.updated_at}</td>
                     </tr>
@@ -178,8 +214,34 @@ const TenantIndex: React.FC = () => {
                   <input type="text" className="form-control" name="domain" placeholder="Enter domain name" />
                 </div>
                 <div className="mb-3">
-                  <label className="form-label">Database Name</label>
-                  <input type="text" className="form-control" name="tenancy_db_name" placeholder="Enter database name" />
+                  <label className="form-label">Address</label>
+                  <input type="text" className="form-control" name="address" placeholder="Enter address" />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Country</label>
+                  <Select
+                    value={selectedCountry}
+                    onChange={handleCountryChange}
+                    options={countries}
+                    placeholder="Select a country"
+                    isSearchable
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Signature</label>
+                  <div style={{ border: '1px solid #000', borderRadius: '4px' }}>
+                    <SignatureCanvas
+                      ref={sigCanvas}
+                      penColor="black"
+                      canvasProps={{ width: 500, height: 200, className: 'sigCanvas' }}
+                    />
+                  </div>
+                  <button type="button" className="btn btn-danger mt-2" onClick={clearSignature}>
+                    <IconTrash size={18} strokeWidth={2} />
+                  </button>
+                  <button type="button" className="btn btn-primary mt-2 ms-1" onClick={saveSignature}>
+                    <IconCheck size={18} strokeWidth={2} />
+                  </button>
                 </div>
               </div>
               <div className="modal-footer">
